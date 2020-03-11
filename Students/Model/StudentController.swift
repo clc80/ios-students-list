@@ -35,8 +35,7 @@ class StudentController {
                 print("Error loading student data: \(error)")
                 completion(nil, error)
             }
-            
         }
-    } // end of func loadFromPersistentStore
+    } // end of loadFromPersistentStore
     
 }
