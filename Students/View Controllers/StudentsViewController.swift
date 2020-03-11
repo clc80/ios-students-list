@@ -26,6 +26,22 @@ class StudentsViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.dataSource = self
+        
+        //Completion handler runs the code after this code is finished.
+        studentController.loadFromPersistentStore { (students, error) in
+            guard error == nil else {
+                print("Error loading students: \(error!)")
+                return
+            }
+            
+            guard let students = students else {
+                print("Error loading students: The array was nil.")
+                return
+            }
+            
+            self.filteredAndSortedStudents = students
+            print(self.filteredAndSortedStudents)
+        }
     }
     
     // MARK: - Action Handlers
