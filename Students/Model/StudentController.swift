@@ -8,6 +8,18 @@
 
 import Foundation
 
+enum TrackType: Int {
+    case none
+    case iOS
+    case Web
+    case UX
+}
+
+enum SortOption: Int {
+    case firstName
+    case lastName
+}
+
 class StudentController {
     
     // MARK: - Private Properties
@@ -37,5 +49,35 @@ class StudentController {
             }
         }
     } // end of loadFromPersistentStore
+    
+    func filter(with trackType: TrackType, sortedBy sorter: SortOption) -> [Student] {
+        var updatedStudents: [Student] = []
+        
+        switch trackType {
+        case .iOS:
+            updatedStudents = students.filter({ (student) -> Bool in
+                return student.course == "iOS"
+            })
+        case .Web:
+            updatedStudents = students.filter({
+                return $0.course == "Web"
+            })
+        case .UX:
+            updatedStudents = students.filter{ $0.course == "UX" }
+        case .none:
+            updatedStudents = students
+        }
+        
+        switch sorter {
+        case .firstName:
+            updatedStudents = updatedStudents.sorted(by: { (studentA, studentB) -> Bool in
+                return studentA.firstName < studentB.firstName
+            })
+        case .lastName:
+            updatedStudents = updatedStudents.sorted { $0.lastName < $1.lastName }
+        }
+        
+        return updatedStudents
+    }
     
 }
