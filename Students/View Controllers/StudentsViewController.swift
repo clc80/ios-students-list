@@ -17,6 +17,10 @@ class StudentsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
+    
+    private let studentController = StudentController()
+    private var filteredAndSortedStudents: [Student] = []
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +42,8 @@ class StudentsViewController: UIViewController {
         
     }
 }
+
+//MARK: - Extension
 
 extension StudentsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
